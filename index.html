@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Tattoo Porto — Tattoos, Exhibitions &amp; Café</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', Arial, sans-serif; background:#0d0d0f; color:#f2ede6; line-height:1.6; }
+  .demo-banner { background:#c9a227; color:#111; text-align:center; padding:10px 16px; font-weight:700; font-size:14px; letter-spacing:1px; }
+  .demo-banner span { display:block; font-weight:400; font-size:12px; letter-spacing:0; }
+  header { background:linear-gradient(180deg,#1a1a1e,#0d0d0f); text-align:center; padding:64px 20px 56px; border-bottom:3px solid #b3122e; }
+  header .mark { font-size:64px; }
+  header h1 { font-size:44px; letter-spacing:4px; text-transform:uppercase; }
+  header h1 em { color:#d4af37; font-style:normal; }
+  header p.tag { color:#d4af37; letter-spacing:3px; text-transform:uppercase; font-size:14px; margin:10px 0 18px; }
+  header p.sub { max-width:640px; margin:0 auto 26px; color:#cfc9bd; font-size:17px; }
+  .btn { display:inline-block; background:#b3122e; color:#fff; text-decoration:none; padding:14px 28px; border-radius:30px; font-weight:700; margin:4px; }
+  .btn.gold { background:#d4af37; color:#111; }
+  .btn.ghost { background:transparent; border:2px solid #d4af37; color:#d4af37; }
+  section { max-width:1020px; margin:0 auto; padding:52px 20px; }
+  h2 { font-size:30px; margin-bottom:8px; text-transform:uppercase; letter-spacing:2px; }
+  h2 span { color:#d4af37; }
+  .sec-sub { color:#b9b2a4; margin-bottom:28px; max-width:680px; }
+  .stats { display:flex; flex-wrap:wrap; gap:16px; margin-top:-8px; }
+  .stat { flex:1; min-width:150px; background:#1c1c21; border:1px solid #2c2c33; border-radius:12px; padding:20px; text-align:center; }
+  .stat b { display:block; font-size:28px; color:#d4af37; }
+  .filters { margin-bottom:20px; }
+  .filters button { background:#1c1c21; color:#f2ede6; border:1px solid #3a3a42; border-radius:20px; padding:8px 16px; margin:0 6px 8px 0; cursor:pointer; font-size:14px; }
+  .filters button.active { background:#b3122e; border-color:#b3122e; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+  .card { background:#1c1c21; border:1px solid #2c2c33; border-radius:14px; overflow:hidden; }
+  .card .tile { font-size:56px; text-align:center; padding:28px 10px 10px; background:#232329; }
+  .card .body { padding:16px; }
+  .card h3 { font-size:18px; margin-bottom:6px; }
+  .card p { color:#b9b2a4; font-size:14px; }
+  .card .tag { display:inline-block; margin-top:10px; font-size:12px; color:#d4af37; border:1px solid #d4af37; border-radius:12px; padding:2px 10px; }
+  .artists { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .artist { background:#1c1c21; border:1px solid #2c2c33; border-radius:14px; padding:24px; }
+  .artist .ava { font-size:48px; }
+  .artist h3 { margin:8px 0 4px; }
+  .artist p { color:#b9b2a4; font-size:15px; }
+  .auto { background:#17171b; border:1px solid #2c2c33; border-radius:16px; padding:32px 28px; }
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:20px 0; }
+  .step { background:#1c1c21; border-radius:12px; padding:20px; }
+  .step b.num { display:inline-block; width:34px; height:34px; line-height:34px; text-align:center; border-radius:50%; background:#b3122e; color:#fff; margin-bottom:10px; }
+  .step h3 { font-size:17px; margin-bottom:6px; }
+  .step p { color:#b9b2a4; font-size:14px; }
+  .auto-list { list-style:none; margin-top:8px; }
+  .auto-list li { padding:8px 0 8px 30px; position:relative; color:#e8e2d6; }
+  .auto-list li:before { content:"✓"; position:absolute; left:0; color:#d4af37; font-weight:700; }
+  .chat { background:#1c1c21; border:1px solid #2c2c33; border-radius:16px; padding:20px; margin-top:28px; }
+  .chat-log { min-height:120px; max-height:220px; overflow-y:auto; margin-bottom:14px; }
+  .msg { padding:10px 14px; border-radius:12px; margin-bottom:8px; max-width:85%; font-size:15px; }
+  .msg.bot { background:#2a2a31; }
+  .msg.user { background:#b3122e; margin-left:auto; }
+  .chips button { background:#2a2a31; color:#f2ede6; border:1px solid #3a3a42; border-radius:18px; padding:8px 14px; margin:0 6px 8px 0; cursor:pointer; font-size:14px; }
+  form.book { display:grid; gap:12px; margin-top:8px; }
+  form.book input, form.book select, form.book textarea { background:#1c1c21; border:1px solid #3a3a42; color:#f2ede6; border-radius:10px; padding:12px 14px; font-size:15px; width:100%; }
+  form.book label { font-size:14px; color:#b9b2a4; }
+  .visit { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .visit div { background:#1c1c21; border:1px solid #2c2c33; border-radius:12px; padding:20px; }
+  .visit h3 { margin-bottom:6px; }
+  .visit p { color:#b9b2a4; font-size:15px; }
+  .visit a { color:#d4af37; }
+  footer { text-align:center; padding:28px 16px 40px; color:#8d877a; font-size:13px; border-top:1px solid #222228; }
+  @media (max-width:600px){ header h1{font-size:32px;} h2{font-size:24px;} }
+</style>
+</head>
+<body>
+<div class="demo-banner">★ DEMO WEBSITE ★<span>Built by Abdullah Bin Haseeb to show what your studio's website could look like — not your live site yet.</span></div>
+
+<header>
+  <div class="mark">🍀</div>
+  <h1>Lucky Tattoo <em>Porto</em></h1>
+  <p class="tag">Tatuagens &nbsp;•&nbsp; Exposições &nbsp;•&nbsp; Café</p>
+  <p class="sub">30 years of tattooing in the heart of Porto. Artist Mario has been passionate about his profession since 1997 — appointments &amp; walk-ins, Monday to Saturday.</p>
+  <a class="btn" href="#book">Book Your Tattoo</a>
+  <a class="btn gold" href="https://wa.me/351963939774" target="_blank">WhatsApp Us</a>
+  <a class="btn ghost" href="#gallery">See the Work</a>
+</header>
+
+<section>
+  <div class="stats">
+    <div class="stat"><b>30</b>years of tattooing</div>
+    <div class="stat"><b>9.4K</b>Instagram followers</div>
+    <div class="stat"><b>11–20</b>Mon–Sat opening hours</div>
+    <div class="stat"><b>100%</b>walk-ins welcome</div>
+  </div>
+</section>
+
+<section id="gallery">
+  <h2>Our <span>Work</span></h2>
+  <p class="sec-sub">Every style, every size — tap a style to filter the gallery. Prices are given on consultation: send us your idea and we quote you.</p>
+  <div class="filters">
+    <button class="active" onclick="filterGallery('all',this)">All styles</button>
+    <button onclick="filterGallery('cover',this)">Cover-Ups</button>
+    <button onclick="filterGallery('realism',this)">Realism</button>
+    <button onclick="filterGallery('fine',this)">Fine Line</button>
+    <button onclick="filterGallery('letter',this)">Lettering</button>
+  </div>
+  <div class="grid" id="galleryGrid">
+    <div class="card" data-cat="cover"><div class="tile">🎭</div><div class="body"><h3>Cover-Up Tattoos</h3><p>An old tattoo becomes new art. Our most requested work — cover-ups done with care and realism.</p><span class="tag">Most requested</span></div></div>
+    <div class="card" data-cat="realism"><div class="tile">🦁</div><div class="body"><h3>Realism</h3><p>Realistic work, from portraits to dragons — detail that looks alive on the skin.</p><span class="tag">Realistic</span></div></div>
+    <div class="card" data-cat="fine"><div class="tile">✒️</div><div class="body"><h3>Fine Line</h3><p>Small and simple fine line tattoos — delicate, clean, and made to last.</p><span class="tag">Delicate</span></div></div>
+    <div class="card" data-cat="letter"><div class="tile">💌</div><div class="body"><h3>Lettering &amp; Names</h3><p>The names of the people inside your heart, marked on your skin — in the lettering style you choose.</p><span class="tag">Personal</span></div></div>
+    <div class="card" data-cat="realism"><div class="tile">💀</div><div class="body"><h3>Skull &amp; Dark Art</h3><p>Skull, lettering and more — bold dark pieces, work in progress and finished.</p><span class="tag">Bold</span></div></div>
+    <div class="card" data-cat="realism"><div class="tile">🐉</div><div class="body"><h3>Dragon &amp; Oriental</h3><p>Dragons and oriental designs by our guest artists — big pieces with real presence.</p><span class="tag">Guest artist</span></div></div>
+    <div class="card" data-cat="fine"><div class="tile">🌸</div><div class="body"><h3>Small &amp; Simple</h3><p>Even when they are tiny and cute, they are great works of art.</p><span class="tag">Tiny &amp; cute</span></div></div>
+    <div class="card" data-cat="cover"><div class="tile">🎨</div><div class="body"><h3>All Styles &amp; Sizes</h3><p>We do all styles and all sizes. Haven't chosen yours yet? Come and talk to us.</p><span class="tag">Any style</span></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Your <span>Artists</span></h2>
+  <p class="sec-sub">Meet the hands behind the work.</p>
+  <div class="artists">
+    <div class="artist"><div class="ava">👨‍🎨</div><h3>Mario — Founder &amp; Tattoo Artist</h3><p>Tattoo artist since 1997. 30 years passionate about his profession. All styles, cover-ups, realism and fine line. <br><b>@marioluckytattoo</b></p></div>
+    <div class="artist"><div class="ava">🌏</div><h3>Kenneth Velasco — Guest Artist</h3><p>Guest artist at Lucky Tattoo. Realism, dragons and cover-up work. Check the gallery for his latest pieces.</p></div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="auto">
+    <h2>Booking, <span>Fully Automated</span></h2>
+    <p class="sec-sub">Your ads bring people here — the website turns clicks into bookings, even while you are tattooing. No more missed DMs.</p>
+    <div class="steps">
+      <div class="step"><b class="num">1</b><h3>Pick your style &amp; day</h3><p>Choose a style and your preferred day below. It takes less than a minute.</p></div>
+      <div class="step"><b class="num">2</b><h3>Booking goes straight to WhatsApp</h3><p>Your request arrives on Mario's WhatsApp instantly — no waiting for a DM reply.</p></div>
+      <div class="step"><b class="num">3</b><h3>Automatic confirmation &amp; reminder</h3><p>Clients get an automatic confirmation and a reminder before their appointment, so no-shows drop.</p></div>
+    </div>
+    <ul class="auto-list">
+      <li><b>AI assistant answers questions 24/7</b> — hours, styles, aftercare, walk-ins and prices, even at night.</li>
+      <li><b>Aftercare guide sent automatically</b> after every booking, so clients heal well and come back.</li>
+      <li><b>Walk-ins welcome</b> — the site shows live opening hours, so clients know when to come.</li>
+      <li><b>Gallery, services and booking in one place</b> — everything a client needs before they decide.</li>
+    </ul>
+
+    <div class="chat">
+      <h3 style="margin-bottom:10px;">💬 Ask our AI assistant <span style="color:#d4af37;font-size:13px;">(demo — try it)</span></h3>
+      <div class="chat-log" id="chatLog">
+        <div class="msg bot">Hi! I'm Lucky's assistant. Ask me anything about the studio — hours, styles, booking or aftercare. 👇</div>
+      </div>
+      <div class="chips">
+        <button onclick="askBot('hours')">What are your hours?</button>
+        <button onclick="askBot('walkin')">Do you take walk-ins?</button>
+        <button onclick="askBot('price')">How much does a tattoo cost?</button>
+        <button onclick="askBot('book')">How do I book?</button>
+        <button onclick="askBot('where')">Where are you located?</button>
+        <button onclick="askBot('aftercare')">Aftercare advice?</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px;">📅 Book in under a minute</h3>
+    <form class="book" onsubmit="return sendBooking(event)">
+      <label>Your name<input id="bkName" type="text" placeholder="Your name" required></label>
+      <label>Tattoo style
+        <select id="bkStyle">
+          <option>Cover-Up</option><option>Realism</option><option>Fine Line</option>
+          <option>Lettering / Name</option><option>Skull / Dark</option><option>Dragon / Oriental</option>
+          <option>Small &amp; Simple</option><option>Not sure yet</option>
+        </select>
+      </label>
+      <label>Preferred day
+        <select id="bkDay"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option></select>
+      </label>
+      <label>Your idea<textarea id="bkIdea" rows="3" placeholder="Tell us your idea — size, placement, anything else"></textarea></label>
+      <button class="btn" type="submit" style="border:none;cursor:pointer;">Send Booking on WhatsApp →</button>
+      <p style="font-size:13px;color:#b9b2a4;">This opens WhatsApp with your booking already written — just press send. No account, no waiting.</p>
+    </form>
+  </div>
+</section>
+
+<section>
+  <h2>Visit <span>Us</span></h2>
+  <div class="visit">
+    <div><h3>📍 Address</h3><p>Rua Faria Guimarães 155,<br>4000-206 Porto, Portugal</p></div>
+    <div><h3>🕐 Hours</h3><p>Monday to Saturday<br>11:00 AM – 8:00 PM<br>Open by appointment &amp; walk-ins</p></div>
+    <div><h3>📲 Contact</h3><p>WhatsApp: <a href="https://wa.me/351963939774">+351 963 939 774</a><br>Email: <a href="mailto:mariovazlucky@gmail.com">mariovazlucky@gmail.com</a><br>Instagram: <a href="https://www.instagram.com/luckytattooporto">@luckytattooporto</a></p></div>
+  </div>
+  <p style="margin-top:20px;text-align:center;"><a class="btn gold" href="https://wa.me/351963939774" target="_blank">Book on WhatsApp</a></p>
+</section>
+
+<footer>
+  Lucky Tattoo Porto — Tattoos • Exhibitions • Café<br>
+  Demo website built by Abdullah Bin Haseeb. Prices on consultation — DM for a quote.
+</footer>
+
+<script>
+function filterGallery(cat, btn){
+  document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#galleryGrid .card').forEach(c=>{
+    c.style.display = (cat==='all' || c.dataset.cat===cat) ? '' : 'none';
+  });
+}
+var answers = {
+  hours: "We are open Monday to Saturday, 11:00 AM to 8:00 PM. Sundays we rest. 😊",
+  walkin: "Yes! We take walk-ins as well as appointments — just come to Rua Faria Guimarães 155, Porto.",
+  price: "Prices depend on size, style and placement. Send us your idea on WhatsApp (+351 963 939 774) and Mario will quote you.",
+  book: "Pick a style and day in the booking form below — it sends straight to our WhatsApp. Or message us directly on Instagram or WhatsApp.",
+  where: "Rua Faria Guimarães 155, 4000-206 Porto — right in the centre of Porto.",
+  aftercare: "Keep it clean, moisturise lightly, avoid sun and swimming for 2 weeks. A full aftercare guide is sent automatically after you book."
+};
+function askBot(key){
+  var log = document.getElementById('chatLog');
+  var q = document.querySelector('button[onclick="askBot(\''+key+'\')"]').textContent;
+  log.innerHTML += '<div class="msg user">'+q+'</div>';
+  setTimeout(function(){
+    log.innerHTML += '<div class="msg bot">'+answers[key]+'</div>';
+    log.scrollTop = log.scrollHeight;
+  }, 400);
+  log.scrollTop = log.scrollHeight;
+}
+function sendBooking(e){
+  e.preventDefault();
+  var name = document.getElementById('bkName').value.trim();
+  var style = document.getElementById('bkStyle').value;
+  var day = document.getElementById('bkDay').value;
+  var idea = document.getElementById('bkIdea').value.trim();
+  var text = "Hi Lucky Tattoo Porto! I'm " + name + ". I'd like to book a " + style + " tattoo, preferably on " + day + "." + (idea ? " My idea: " + idea : "") + " Please confirm my booking. Thanks!";
+  window.open("https://wa.me/351963939774?text=" + encodeURIComponent(text), "_blank");
+  return false;
+}
+</script>
+</body>
+</html>
